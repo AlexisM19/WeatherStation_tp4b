@@ -13,7 +13,6 @@ namespace WeatherApp
 
             ApplicationView app = new ApplicationView();
 
-
             app.Show();
 
         }
