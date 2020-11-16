@@ -49,8 +49,8 @@ namespace WeatherApp.ViewModels
             ChangePageCommand = new DelegateCommand<string>(ChangePage);
            
             /// TODO 11 : Commenter cette ligne lorsque la configuration utilisateur fonctionne
-            var apiKey = AppConfiguration.GetValue("OWApiKey");
-            ows = new OpenWeatherService(apiKey);
+            //var apiKey = AppConfiguration.GetValue("OWApiKey");
+            ows = new OpenWeatherService(Properties.Settings.Default.apiKey);
 
             initViewModels();
         }
@@ -94,10 +94,23 @@ namespace WeatherApp.ViewModels
             ///   Si le service de temperature est null
             ///     Assigner le service de température
             /// 
-           
 
             /// Permet de retrouver le ViewModel avec le nom indiqé
-            CurrentViewModel = ViewModels.FirstOrDefault(x => x.Name == pageName);  
+            // CurrentViewModel = ViewModels.FirstOrDefault(x => x.Name == pageName);
+
+            if (CurrentViewModel.Name == "ConfigurationViewModel")
+            {
+                ows.SetApiKey(Properties.Settings.Default.apiKey);
+                TemperatureViewModel t = (TemperatureViewModel)ViewModels.FirstOrDefault(x => x.Name == "TemperatureViewModel");
+                if (t.TemperatureService == null)
+                {
+                    ITemperatureService itmps = new OpenWeatherService(AppConfiguration.GetValue("apikey"));
+                    t.SetTemperatureService(itmps);
+                }
+            }
+
+            CurrentViewModel = ViewModels.FirstOrDefault(x => x.Name == pageName);
+
         }
 
         #endregion
