@@ -3,6 +3,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using Xceed.Wpf.Toolkit;
 
 namespace OpenWeatherAPI
 {
@@ -71,6 +72,10 @@ namespace OpenWeatherAPI
         /// <returns></returns>
         public async Task<OWCurrentWeaterModel> GetCurrentWeatherAsync()
         {
+            if(ApiKey == null || ApiKey == "")
+            {
+                return null;
+            }
             EndPoint = $"/weather?";
 
             /// Src : https://stackoverflow.com/a/14517976/503842
