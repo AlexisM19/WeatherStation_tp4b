@@ -32,6 +32,7 @@ namespace WeatherApp.ViewModels
         {
             /// TODO 04 : Les tâches manquantes sont dans les XAML.
             /// TODO 04a : Sauvegarder la configuration
+            apiKey = obj;
         }
 
         private string GetApiKey()
