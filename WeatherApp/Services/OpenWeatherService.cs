@@ -23,7 +23,7 @@ namespace WeatherApp.Services
             var temp = await owp.GetCurrentWeatherAsync();
             if(temp == null)
             {
-                MessageBox.Show("There is currently no ApiKey. Please set one before accessing weather service.");
+                MessageBox.Show("Please be sure you've set a valid ApiKey and City name.");
                 return new TemperatureModel();
             }
             else
