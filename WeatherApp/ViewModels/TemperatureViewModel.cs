@@ -52,6 +52,8 @@ namespace WeatherApp.ViewModels
         {
             get
             {
+                if (!CanGetTemp(""))
+                    return "Please enter an ApiKey in your Preferences.";
                 return _rawText;
             }
             set
@@ -75,7 +77,7 @@ namespace WeatherApp.ViewModels
         /// <returns></returns>
         public bool CanGetTemp(string obj)
         {
-            if (Properties.Settings.Default.apiKey != "")
+            if (Properties.Settings.Default.apiKey.Trim() != "")
                 return TemperatureService != null;
             else return false;
         }
